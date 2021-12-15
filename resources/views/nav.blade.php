@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand navbar-dark blue-gradient">
 
     <a class="navbar-brand" href="/"><i class="far fa-sticky-note mr-1"></i>memo</a>
+    @if(Auth::check())
+    <div class="nav-item text-white">{{ Auth::user()->name }}さん、こんにちは</div>
+    @endif
 
     <ul class="navbar-nav ml-auto">
 
