@@ -27,6 +27,9 @@ Route::prefix('articles')->name('articles.')->group(function () {
 
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 
+//ゲストユーザーログイン
+Route::get('guest', 'Auth\LoginController@guestLogin')->name('login.guest');
+
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/{name}', 'UserController@show')->name('show');
     Route::get('/{name}/likes', 'UserController@likes')->name('likes');
