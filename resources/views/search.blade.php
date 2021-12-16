@@ -1,4 +1,4 @@
-<form class="d-flex align-items-center" action="">
+<form class="d-flex align-items-center mt-4" action="">
     <select name="category" id="category" class="form-control" style="border-radius: 0.25rem 0 0 0.25rem;">
         <option value=''></option>
         <option value="" selected></option>
