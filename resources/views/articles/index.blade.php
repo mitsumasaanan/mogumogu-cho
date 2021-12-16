@@ -9,5 +9,8 @@
     @foreach($articles as $article)
     @include('articles.card')
     @endforeach
+    <div class="mt-4">
+        {{ $articles->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection
