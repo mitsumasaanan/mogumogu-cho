@@ -45,4 +45,47 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function searchRange()
+    {
+        return [
+            'tags' => Tag::all(),
+        ];
+    }
+
+    public function search($request)
+    {
+        // バリデーション済みのリクエストパラメーターの連想配列
+        $search = [
+            'tag' => intval($request->tag),
+            'word' => $request->word,
+        ];
+
+        // リクエストパラメーターに該当するレコードの取得
+        $articles = $this->query()
+            ->when($search['tag'], function ($q) use ($search) {
+                return $q->where('id', $search['tag']);
+            })
+            ->when($search['word'], function ($q) use ($search) {
+                return $q->where('title', 'like', '%' . $this->escapeLike($search['word']) . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        // 検索結果とページング時に検索条件を保持するための配列を値に持つ連想配列
+        $searchData = [
+            'articles' => $articles,
+            'retentionParams' => [
+                'tag' => $search['tag'] ?? null,
+                'word' => $search['word'] ?? null,
+            ],
+        ];
+
+        return $searchData;
+    }
+
+    public static function escapeLike($str)
+    {
+        return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
+    }
 }

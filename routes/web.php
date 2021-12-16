@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/', 'ArticleController@index')->name('articles.index');
 
+Route::get('/articles/search', 'ArticleController@search')->name('articles.search');
+
 Route::resource('/articles', 'ArticleController')->except(['index', 'show'])->middleware('auth');
 Route::resource('/articles', 'ArticleController')->only(['show']);
 
