@@ -7,6 +7,7 @@ use App\Tag;
 use App\Comment;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\SearchRequest;
 
 class ArticleController extends Controller
 {
@@ -18,8 +19,9 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all()->sortByDesc('created_at');
+        $tags = Tag::orderBy('id', 'asc')->get();
 
-        return view('articles.index', ['articles' => $articles]);
+        return view('articles.index', ['articles' => $articles], ['tags' => $tags]);
     }
 
     public function create()
@@ -105,5 +107,16 @@ class ArticleController extends Controller
             'id' => $article->id,
             'countLikes' => $article->count_likes,
         ];
+    }
+
+    public function search(SearchRequest $request, Article $article)
+    {
+        // 検索結果を代入
+        $searchData = $article->search($request);
+
+        // 期とカテゴリーの検索範囲を定義したメソッドの戻り値を代入
+        $searchRanges = $article->searchRange();
+
+        return view('articles.index', $searchData, $searchRanges);
     }
 }

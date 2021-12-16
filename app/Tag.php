@@ -20,4 +20,10 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Article')->withTimestamps();
     }
+
+    public function getLists()
+    {
+        $categories = Tag::orderBy('id', 'asc')->pluck('name', 'id');
+        return $categories;
+    }
 }
