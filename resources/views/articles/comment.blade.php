@@ -1,6 +1,6 @@
 @if(Auth::check())
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <form method="POST" action="{{ route('comments.store') }}">
             @csrf
             <div class="mt-3">
@@ -19,19 +19,49 @@
                 </button>
             </div>
         </form>
-    </div>
-</div>
-</div>
-@endif
-<div class="row justify-content-center">
-    <div class="col-md-12">
+        @endif
         <div class="mb-5">
             <div class="border-bottom mt-3">
                 <h3>コメント</h3>
             </div>
-
             @forelse($article->comments as $comment)
-            <p><i class="fas fa-user mr-2 text-dark"></i>{{ $comment->user->name }}（投稿日時：{{ $comment->created_at }} ）</p>
+            <div class="dropdown"><i class="fas fa-user mr-2 text-dark"></i>
+                {{ $comment->user->name }}（投稿日時：{{ $comment->created_at }} ）
+                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="">
+                        <i class="fas fa-pen mr-1"></i>コメントを更新する
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $comment->id }}">
+                        <i class="fas fa-trash-alt mr-1"></i>コメントを削除する
+                    </a>
+                </div>
+            </div>
+            <div id="modal-delete-{{ $comment->id }}" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="POST" action="">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                このコメントを削除します。よろしいですか？
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                                <button type="submit" class="btn btn-danger">削除する</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <p>　{{ $comment->comment }}</p>
             <hr class="mb-0">
             @empty
