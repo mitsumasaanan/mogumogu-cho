@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn blue-gradient">
                     コメントを送信
                 </button>
             </div>
@@ -27,11 +27,12 @@
             @forelse($article->comments as $comment)
             <div class="dropdown"><i class="fas fa-user mr-2 text-dark"></i>
                 {{ $comment->user->name }}（投稿日時：{{ $comment->created_at }} ）
+                @if( Auth::id() === $comment->user_id )
                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="">
+                    <a class="dropdown-item" href="{{ route("comments.edit", ['comment' => $comment]) }}">
                         <i class="fas fa-pen mr-1"></i>コメントを更新する
                     </a>
                     <div class="dropdown-divider"></div>
@@ -39,6 +40,7 @@
                         <i class="fas fa-trash-alt mr-1"></i>コメントを削除する
                     </a>
                 </div>
+                @endif
             </div>
             <div id="modal-delete-{{ $comment->id }}" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -48,7 +50,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form method="POST" action="">
+                        <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment]) }}">
                             @csrf
                             @method('DELETE')
                             <div class="modal-body">
