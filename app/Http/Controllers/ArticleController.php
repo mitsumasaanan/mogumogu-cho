@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\ArticleImg;
 use App\Tag;
 use App\Comment;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SearchRequest;
 
 class ArticleController extends Controller
@@ -18,7 +20,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        $articles = Article::with('user', 'articleImgs')->orderBy('created_at', 'desc')->paginate(5);
         $tags = Tag::orderBy('id', 'asc')->get();
 
         return view('articles.index', ['articles' => $articles], ['tags' => $tags]);
@@ -33,11 +35,17 @@ class ArticleController extends Controller
         return view('articles.create', ['allTagNames' => $allTagNames,]);
     }
 
-    public function store(ArticleRequest $request, Article $article)
+    public function store(ArticleRequest $request, Article $article, ArticleImg $article_img)
     {
         $article->fill($request->all());
         $article->user_id = $request->user()->id;
         $article->save();
+
+        if ($request->hasFile('article_img')) {
+            $article_img = $request->file('article_img');
+            $url = Storage::disk('s3')->putFile('pf-images', $article_img, 'public');
+            $article->articleImgs()->create(['img_path' => $url]);
+        }
 
         $request->tags->each(function ($tagName) use ($article) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
@@ -85,7 +93,8 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        return view('articles.show', ['article' => $article]);
+        $articleImgs = Article::with('articleImgs')->get();
+        return view('articles.show', compact('article', 'articleImgs'));
     }
 
     public function like(Request $request, Article $article)

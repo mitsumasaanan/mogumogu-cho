@@ -27,6 +27,7 @@ class ArticleRequest extends FormRequest
             'title' => 'required|max:50',
             'body' => 'required|max:500',
             'tags' => 'json|regex:/^(?!.*\s).+$/u|regex:/^(?!.*\/).*$/u',
+            'article_img' => 'file|mimes:jpeg,png,jpg,bmb|max:2048',
         ];
     }
 
@@ -36,6 +37,7 @@ class ArticleRequest extends FormRequest
             'title' => 'タイトル',
             'body' => '本文',
             'tags' => 'タグ',
+            'article_img' => '画像',
         ];
     }
 
