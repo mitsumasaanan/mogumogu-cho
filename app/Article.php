@@ -88,4 +88,9 @@ class Article extends Model
     {
         return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
+
+    public function articleImgs()
+    {
+        return $this->hasMany(ArticleImg::class);
+    }
 }
