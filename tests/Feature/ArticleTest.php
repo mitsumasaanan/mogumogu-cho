@@ -19,4 +19,13 @@ class ArticleTest extends TestCase
 
         $this->assertFalse($result);
     }
+
+    public function testGuestUpdate()
+    {
+        $article = factory(Article::class)->create();
+
+        $response = $this->get(route("articles.edit", ['article' => $article]));
+
+        $response->assertRedirect(route('login'));
+    }
 }
