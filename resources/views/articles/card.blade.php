@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <div class="card-header d-flex flex-row">
+    <div class="card-header base-bg d-flex flex-row">
         <a href="{{ route('users.show', ['name' => $article->user->name]) }}" class="text-dark">
             <i class="fas fa-user-circle fa-3x mr-1"></i>
         </a>
@@ -73,9 +73,11 @@
                     {{ $article->title }}
                 </a>
             </h3>
+            @if(\Route::is('articles.show'))
             <div class="card-text my-3">
                 {!! nl2br(e( $article->body )) !!}
             </div>
+            @endif
             <div class="card-text my-3">
                 <article-like :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))' :initial-count-likes='@json($article->count_likes)' :authorized='@json(Auth::check())' endpoint="{{ route('articles.like', ['article' => $article]) }}">
                 </article-like>

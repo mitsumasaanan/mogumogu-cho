@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark blue-gradient">
+<nav class="navbar navbar-expand navbar-dark base-bg">
 
     <a class="navbar-brand" href="/">もぐもぐ帳 <i class="fas fa-utensils mr-1"></i></a>
     @if(Auth::check())
