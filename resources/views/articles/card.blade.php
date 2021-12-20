@@ -14,7 +14,7 @@
     </div>
     @if( Auth::id() === $article->user_id )
     <!-- dropdown -->
-    <div class="ml-auto card-text">
+    <div class="dropdown-wrapper ml-auto card-text">
         <div class="dropdown">
             <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
