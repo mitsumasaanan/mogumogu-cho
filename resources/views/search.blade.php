@@ -10,7 +10,7 @@
         @endforeach
     </select>
     <input placeholder="フリーワード" type="text" name="word" id="word" maxlength="100" class="form-control" value="{{ $retentionParams['word'] ?? '' }}" style="border-radius: unset">
-    <button type="submit" class="btn base-bg text-white d-block mx-auto blue-gradient" style="border-radius: 0 0.25rem 0.25rem 0; border: 1px solid #ced4da;height: 40px;">
+    <button type="submit" class="btn base-bg text-white d-block mx-auto base-bg" style="border-radius: 0 0.25rem 0.25rem 0; border: 1px solid #ced4da;height: 40px;">
         <i class="fa fa-search d-flex justify-content-center"></i>
     </button>
 </form>
