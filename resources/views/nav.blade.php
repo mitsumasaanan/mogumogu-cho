@@ -4,29 +4,31 @@
     @if(Auth::check())
     <div class="nav-item text-white">{{ Auth::user()->name }}さん、こんにちは</div>
     @endif
-
-    <ul class="navbar-nav ml-auto">
+    <div class="menu-btn">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <ul class="menu">
 
         @guest
-        <li class="nav-item">
+        <li class="nav-item menu__item">
             <a class="nav-link" href="{{ route('register') }}">ユーザー登録</a>
         </li>
         @endguest
 
         @guest
-        <li class="nav-item">
+        <li class="nav-item menu__item">
             <a class="nav-link" href="{{ route('login') }}">ログイン</a>
         </li>
         @endguest
 
         @guest
-        <li class="nav-item btn-success">
+        <li class="nav-item btn-success menu__item">
             <a class="nav-link" href="{{ route('login.guest') }}">ゲストログイン</a>
         </li>
         @endguest
 
         @auth
-        <li class="nav-item">
+        <li class="nav-item menu__item">
             <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
         </li>
         @endauth
