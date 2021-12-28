@@ -58,7 +58,6 @@ jobs:
           name: deploy
           command: |
             ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd mogumogu-cho && \
-              git reset HEAD --hard && \
               git pull origin main && \
               composer install -n --no-dev --prefer-dist && \
               npm ci && \

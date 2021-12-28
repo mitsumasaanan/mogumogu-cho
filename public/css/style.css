@@ -70,8 +70,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #af9b65;
   padding: 0;
+  background: linear-gradient(40deg,#bd9576,#af9b65)!important;
 }
 .menu__item{
   height: auto;
@@ -96,6 +96,7 @@ a.nav-link {
   pointer-events: auto;
   opacity: 1;
   padding-bottom: 10px;
+  border-bottom: 1px solid #af9b65;
 }
 
 ul.ml-auto.menu.is-active {
@@ -112,7 +113,7 @@ ul.ml-auto.menu.is-active {
     display: flex;
     justify-content: end;
     flex-direction: unset;
-    background: #af9b65;
+    background: linear-gradient(40deg,#bd9576,#af9b65)!important;
     opacity:1;
     pointer-events: initial;
   }
