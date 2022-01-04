@@ -1,9 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark base-bg">
 
     <a class="navbar-brand" href="/">もぐもぐ帳 <i class="fas fa-utensils mr-1"></i></a>
-    @if(Auth::check())
-    <div class="nav-item text-white">{{ Auth::user()->name }}さん、こんにちは</div>
-    @endif
     <div class="menu-btn">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
@@ -28,6 +25,9 @@
         @endguest
 
         @auth
+        @if(Auth::check())
+        <li class="nav-item menu__item">{{ Auth::user()->name }}さん、こんにちは</li>
+        @endif
         <li class="nav-item menu__item">
             <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
         </li>
