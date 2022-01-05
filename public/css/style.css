@@ -43,7 +43,7 @@ body {
 }
 
 li.nav-item {
-    list-style: none;
+  list-style: none;
 }
 
 /*----------------------------
@@ -130,4 +130,20 @@ ul.ml-auto.menu.is-active {
     padding: 0;
     margin: 0.5em 1em;
   }
+
+  .navbar-brand {
+    position: fixed;
+    top: 5px;
+  }
+}
+
+button.nav-link.logout-button {
+  border-style: none;
+  background: transparent;
+  color: white;
+}
+
+button.nav-link.logout-button:hover {
+  color: #007bff;
+  transition: all .2s ease-in-out;
 }
