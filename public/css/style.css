@@ -147,3 +147,7 @@ button.nav-link.logout-button:hover {
   color: #007bff;
   transition: all .2s ease-in-out;
 }
+
+.container {
+  margin-top: 6%;
+}
