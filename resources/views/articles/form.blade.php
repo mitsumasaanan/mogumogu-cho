@@ -15,3 +15,6 @@
     <input id="article_img" type="file" name="article_img">
     <p class="small text-muted">ファイル形式はjpg、png、gifにしてください。</p>
 </div>
+<div class="form-group">
+    <input type="text" name="url" class="form-control" placeholder="参考URL" required value="{{ $article->url ?? old('url') }}">
+</div>
