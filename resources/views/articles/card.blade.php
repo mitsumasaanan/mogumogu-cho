@@ -77,6 +77,10 @@
             <div class="card-text my-3">
                 {!! nl2br(e( $article->body )) !!}
             </div>
+            <div class="card-text my-3">
+                参考URL：<br>
+                {{ $article->url }}
+            </div>
             @endif
             <div class="card-text my-3">
                 <article-like :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))' :initial-count-likes='@json($article->count_likes)' :authorized='@json(Auth::check())' endpoint="{{ route('articles.like', ['article' => $article]) }}">
