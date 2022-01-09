@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-4">
-                <button type="submit" class="btn blue-gradient">
+                <button type="submit" class="btn base-bg">
                     コメントを送信
                 </button>
             </div>
